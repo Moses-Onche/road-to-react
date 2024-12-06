@@ -17,7 +17,7 @@ const list = [
   }
 ];
 
-function App() {
+const App = () => {
 
   // const welcome = {
   //   greeting: "Hey",
@@ -28,8 +28,7 @@ function App() {
     <div className="App">
       <h1>My Hacker Stories</h1>
 
-      <label htmlFor="search">Search</label>
-      <input id="search" type="text" />
+      <Search />
 
       <hr />
 
@@ -70,5 +69,14 @@ const List = () => {
     </div>
   );
 }
+
+const Search = () => {
+  return (
+    <div>
+      <label htmlFor="search">Search</label>
+      <input id="search" type="text" />
+    </div>
+  )
+};
 
 export default App;
