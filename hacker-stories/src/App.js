@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const list = [
   {
     title: "React",
@@ -17,14 +19,7 @@ const list = [
   }
 ];
 
-const App = () => {
-
-  // const welcome = {
-  //   greeting: "Hey",
-  //   title: "React",
-  // }
-
-  return (
+const App = () => (
     <div className="App">
       <h1>My Hacker Stories</h1>
 
@@ -45,9 +40,10 @@ const App = () => {
           })}
       </ul>
     <List />
+    <MyButton />
+    <MyButton />
     </div>
   );
-}
 
 const List = () => {
   return (
@@ -77,6 +73,22 @@ const Search = () => {
       <input id="search" type="text" />
     </div>
   )
+};
+
+const MyButton = () => {
+  const [count, setCount] = useState(1);
+
+  function handleClick() {
+    setCount(count * 2);
+  }
+
+  return (
+    <>
+    <button onClick={handleClick}>
+      Clicked {count} times
+    </button>
+    </>
+  );
 };
 
 export default App;
