@@ -20,16 +20,36 @@ const list = [
 ];
 
 const App = () => (
-    <div className="App">
-      <h1>My Hacker Stories</h1>
+  <div className="App">
+    <h1>My Hacker Stories</h1>
 
-      <Search />
+    <Search />
 
-      <hr />
+    <hr />
 
-      <ul>
-        {list.map((item) => {
-          return <li key={item.objectID}>
+    <ul>
+      {list.map((item) => {
+        return <li key={item.objectID}>
+          <span>
+            <a href={item.url}>{item.title}</a>
+          </span>
+          <span>{item.author}</span>
+          <span>{item.numOfComments}</span>
+          <span>{item.points}</span>
+        </li>
+        })}
+    </ul>
+    <List />
+    <MyButton />
+    <MyButton />
+  </div>
+);
+
+const List = () => (
+  <div>
+    <ul>
+      {list.map(item => (
+          <li key={item.objectID} >
             <span>
               <a href={item.url}>{item.title}</a>
             </span>
@@ -37,43 +57,18 @@ const App = () => (
             <span>{item.numOfComments}</span>
             <span>{item.points}</span>
           </li>
-          })}
-      </ul>
-    <List />
-    <MyButton />
-    <MyButton />
-    </div>
-  );
+        )
+      )}
+    </ul>
+  </div>
+);
 
-const List = () => {
-  return (
-    <div>
-      <ul>
-        {list.map(item => {
-          return (
-            <li key={item.objectID} >
-              <span>
-                <a href={item.url}>{item.title}</a>
-              </span>
-              <span>{item.author}</span>
-              <span>{item.numOfComments}</span>
-              <span>{item.points}</span>
-            </li>
-          )
-        })}
-      </ul>
-    </div>
-  );
-}
-
-const Search = () => {
-  return (
-    <div>
-      <label htmlFor="search">Search</label>
-      <input id="search" type="text" />
-    </div>
-  )
-};
+const Search = () => (
+  <div>
+    <label htmlFor="search">Search</label>
+    <input id="search" type="text" />
+  </div>
+);
 
 const MyButton = () => {
   const [count, setCount] = useState(1);
