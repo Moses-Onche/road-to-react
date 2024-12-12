@@ -56,7 +56,7 @@ const List = ({ list }) => (
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleChange = (event) => (setSearchTerm(event.target.value));
+  const handleChange = (event) => setSearchTerm(event.target.value);
   return (
     <div>
       <label htmlFor="search">Search</label>
