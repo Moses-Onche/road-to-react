@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './App.css';
 
 const App = () => {
   const stories = [
@@ -20,6 +21,7 @@ const App = () => {
     }
   ];
 
+
   return (
     <div className="App">
       <h1>My Hacker Stories</h1>
@@ -31,6 +33,7 @@ const App = () => {
       <List list={stories}/>
       <MyButton />
       <MyButton />
+      <Things />
     </div>
   );
 };
@@ -53,12 +56,19 @@ const List = ({ list }) => (
   </div>
 );
 
-const Search = () => {
+const Search = ( { props } ) => {
+  const colors = ['red', 'yellow', 'blue', 'green', 'purple', 'black', 'orange', 'blue', 'lightgrey', 'lightblue']
+  const [bdColor, setbDColor] = useState("");
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleChange = (event) => setSearchTerm(event.target.value);
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+    // console.log("Rerender");
+    setbDColor(colors[Math.trunc(Math.random() * 10)]);
+    console.log(bdColor)
+  };
   return (
-    <div>
+    <div style={ {border: "solid " + bdColor}}>
       <label htmlFor="search">Search</label>
       <input id="search" type="text" onChange={handleChange} />
 
@@ -84,5 +94,17 @@ const MyButton = () => {
     </>
   );
 };
+
+const Things = () => (
+  <div className="thing">
+    <p>List of things</p>
+    <ul>
+      <li>Thing 1</li>
+      <li>Thing 2</li>
+      <li>Thing 3</li> 
+      <li>Thing 4</li>
+    </ul>
+  </div>
+);
 
 export default App;
