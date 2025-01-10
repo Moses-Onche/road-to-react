@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import './App.css';
+import TicTacToe from "./pages/ticTacToe";
 
 const App = () => {
   const stories = [
@@ -59,6 +60,14 @@ const App = () => {
       <MyButton />
       <MyButton />
       <Things />
+      <Link to="/tictactoe">
+        <a>TicTacToe Game</a>
+      </Link>
+      <Router>
+        <Routes>
+          <Route path="./tictactoe" element={ <TicTacToe /> } />
+        </Routes>
+      </Router>
     </div>
   );
 };
