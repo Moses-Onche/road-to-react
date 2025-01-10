@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+// import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import './App.css';
 import TicTacToe from "./pages/ticTacToe";
 
@@ -48,6 +48,14 @@ const App = () => {
     return story.title.toLowerCase().includes(searchTerm.toLowerCase());
   })
 
+  // const Home = () => {
+  //   return (
+  //     <Link to="/tictactoe">
+  //       <p>TicTacToe Game</p>
+  //     </Link>
+  //   )
+  // }
+
   return (
     <div className="App">
       <h1>My Hacker Stories</h1>
@@ -60,14 +68,15 @@ const App = () => {
       <MyButton />
       <MyButton />
       <Things />
-      <Link to="/tictactoe">
-        <a>TicTacToe Game</a>
-      </Link>
-      <Router>
+
+      <TicTacToe />
+
+      {/* <Router>
         <Routes>
-          <Route path="./tictactoe" element={ <TicTacToe /> } />
+          <Route path="/" element={ <Home /> }></Route>
+          <Route path="/tictactoe" element={ <TicTacToe /> } />
         </Routes>
-      </Router>
+      </Router> */}
     </div>
   );
 };
