@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
 
 const App = () => {
@@ -21,16 +22,40 @@ const App = () => {
     }
   ];
 
+  const useSemiPersistentState = (key, initialState) => {
+    const [value, setValue] = useState(
+      localStorage.getItem(key) || initialState
+    );
+
+    useEffect(() => {
+      localStorage.setItem(key, value);
+    }, [value, key])
+
+    return [value, setValue];
+  }
+
+  const [searchTerm, setSearchTerm] = useSemiPersistentState(
+    "search",
+    "React"
+  )
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  }
+
+  const searchedStories = stories.filter(function (story) {
+    return story.title.toLowerCase().includes(searchTerm.toLowerCase());
+  })
 
   return (
     <div className="App">
       <h1>My Hacker Stories</h1>
 
-      <Search />
+      <Search search={searchTerm} onSearch={handleSearch}/>
 
       <hr />
 
-      <List list={stories}/>
+      <List list={ searchedStories }/>
       <MyButton />
       <MyButton />
       <Things />
@@ -39,40 +64,33 @@ const App = () => {
 };
 
 const List = ({ list }) => (
-  <div>
     <ul>
-      {list.map(item => (
-          <li key={item.objectID} >
-            <span>
-              <a href={item.url}>{item.title}</a>
-            </span>
-            <span>{item.author}</span>
-            <span>{item.numOfComments}</span>
-            <span>{item.points}</span>
-          </li>
-        )
-      )}
+      {list.map((item) => (
+        <Item key={item.objectID} item={item} />
+      ))}
     </ul>
-  </div>
+  )
+
+
+const Item = ({ item }) => (
+  <li>
+    <span>
+      <a href={item.url}>{item.title}</a>
+    </span>
+    <span>{item.author}</span>
+    <span>{item.numOfComments}</span>
+    <span>{item.points}</span>
+  </li>
 );
 
-const Search = ( { props } ) => {
-  const colors = ['red', 'yellow', 'blue', 'green', 'purple', 'black', 'orange', 'blue', 'lightgrey', 'lightblue']
-  const [bdColor, setbDColor] = useState("");
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-    // console.log("Rerender");
-    setbDColor(colors[Math.trunc(Math.random() * 10)]);
-    console.log(bdColor)
-  };
-  return (
-    <div style={ {border: "solid " + bdColor}}>
+const Search = (props) => {
+  const { search, onSearch } = props;
+    return (
+    <div className="search">
       <label htmlFor="search">Search</label>
-      <input id="search" type="text" onChange={handleChange} />
+      <input id="search" type="text" value={ search } onChange={ onSearch } />
 
-      <p>Searching for <strong>{searchTerm}</strong></p>
+      <p>Searching for <strong>{props.searchTerm}</strong></p>
     </div>
 
     

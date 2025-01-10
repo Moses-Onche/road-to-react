@@ -41,4 +41,6 @@
   border: solid black;
 }
 
-.search {}
+.search {
+  border: solid greenyellow;
+}
