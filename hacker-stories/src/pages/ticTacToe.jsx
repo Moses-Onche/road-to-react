@@ -1,22 +1,41 @@
+import { useState } from "react";
 import '../css/tictactoe.css'
+
+const Square = () => {
+    const [value, setValue] = useState(null);
+
+    const handleClick = () => {
+        console.log("clicked!");
+        setValue("X");
+    }
+
+    return (
+        <button 
+            className='square' 
+            onClick={ handleClick }
+        >
+            { value }
+        </button>
+    );
+}
 
 const TicTacToe = () => {
     return (
         <>
             <div className='board-row'>
-                <button className='square'>1</button>
-                <button className='square'>2</button>
-                <button className='square'>3</button>
+                <Square />
+                <Square />
+                <Square />
             </div>
             <div className='board-row'>
-                <button className='square'>4</button>
-                <button className='square'>5</button>
-                <button className='square'>6</button>
+                <Square />
+                <Square />
+                <Square />
             </div>
             <div className='board-row'>
-                <button className='square'>7</button>
-                <button className='square'>8</button>
-                <button className='square'>9</button>
+                <Square />
+                <Square />
+                <Square />
             </div>
         </>
     )
